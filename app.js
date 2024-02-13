@@ -21,15 +21,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  User.findById(ObjectId('65bce92db6ebde6d4e69d114'))
+  User.findById(ObjectId('65cb5e6a98ff1a137f7958a2'))
     .then(user => {
-      if (!user) {
-        console.log('User not found.');
-        req.user = null; // Set req.user to null if user is not found
-      } else {
-        const { name, email, cart, _id } = user;
-        req.user = user;
-      }
+      const { name, email, cart, _id } = user;
+      req.user = user;
       next();
     })
     .catch(err => {
